@@ -111,4 +111,7 @@ import langchain_openai langchain_anthropic
   
 랭체인은 이와 같이 다양한 패키지를 제공하여 개발자가 원하는 AI 작업을 효율적으로 수행할 수 있도록 지원한다.  
   
+# **랭체인 버전별 기능 업데이트**  
+![img.png](image/img6.png)  
+  
 
