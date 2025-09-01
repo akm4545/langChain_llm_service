@@ -390,4 +390,13 @@ LCEL.ipynb(람다 함수를 사용한 체인을 통해 구성하기)
 ![img.png](image/img10.png)  
 ![img.png](image/img11.png)  
   
+## **파이프 메서드**  
+파이프 연산자 | 외에도 .pipe() 메서드로 각 작업(러너블 객체)을 순차적으로 연결하여 복잡한 워크플로우를 간결한 체인으로 구성할 수 있다. 다음은 
+앞선 파이프 연산자 예제를 .pipe() 메서드로 구성한 예이다.  
+  
+LCEL.ipynb(.pipe()를 통해 체인 구성하기)  
+  
+또한 .pipe() 메서드를 사용하여 여러 모듈을 한 번에 연결할 수도 있다. 예를 들어 analysis_prompt, model, StrOutputParser()를 .pipe()에 
+한꺼번에 넣어 체인을 간단하게 구성할 수 있다.  
+  
 
