@@ -502,3 +502,9 @@ PROMPTS.ipynb(PromptTemplate를 이용한 퓨샷 프롬프트)
   
 결과를 보면 첫 밴째 예제가 프롬프트에 맞게 텍스트 형태로 변환되어 출력된다. 이 방식으로 모델이 참고할 예제를 제공할 수 있다.  
   
+# **FewShotPromptTemplate을 이용한 프롬프트 생성**  
+이번에는 FewShotPromptTemplate 객체를 사용해 여러 예제를 한꺼번에 프롬프트에 넣는다. 이를 통해 새로운 질문을 던졌을 때 예제를 참고하게 만들 수 
+있다.  
+  
+PROMPTS.ipynb(FewShotPromptTemplate 를 이용한 퓨샷 프롬프트)  
+  
