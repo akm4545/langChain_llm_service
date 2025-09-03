@@ -508,3 +508,10 @@ PROMPTS.ipynb(PromptTemplate를 이용한 퓨샷 프롬프트)
   
 PROMPTS.ipynb(FewShotPromptTemplate 를 이용한 퓨샷 프롬프트)  
   
+이 코드는 우리가 만든 예제들을 템플릿에 넣고 {input}이라는 변수를 사용해 새로운 질문을 받을 준비를 한다. 이 변수 자리에 나중에 새로운 질문이 들어가게 
+된다.  
+  
+따라서 이 코드는 부동산 투자의 장점은 무엇인가? 라는 질문을 입력하면 이전에 제공한 예제와 함께 새로운 프롬프트를 생성하는 과정을 보여준다.  
+  
+![img.png](image/img14.png)  
+  
