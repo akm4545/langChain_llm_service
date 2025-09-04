@@ -693,4 +693,15 @@ PydanticOutputParser와 PromptTemplate을 사용하여 유연하게 AI의 출력
   
 이를 통해 AI의 자유 형식 텍스트를 구조화된 데이터로 변환할 수 있음을 확인할 수 있으며 후속 작업이나 데이터 분석에서 쉽게 활용할 수 있다.  
   
+# **SimpleJsonOutputParser**  
+SimpleJsonOutputParser는 랭체인 라이브러리에서 제공하는 출력 파서 중 하나로 언어 모델의 출력을 JSON 형식으로 파싱하는 데 사용된다. SimpleJsonOutputParser는 
+JSON 형식의 출력이 필요하지만 Pydantic 모델과 같은 복잡한 구조가 필요하지 않을 때 특히 유용하다.  
+  
+또한 실시간 처리와 스트리밍 기능을 지원하여 대규모 언어 모델의 출력을 효율적으로 처리할 수 있다. 다만 언어 모델이 항상 완벽한 JSON 형식을 생성하는 
+것은 아니므로 오류 처리가 중요하다.  
+  
+다음은 SimpleJsonOutputParser를 활용하여 언어 모델의 출력을 JSON 형식으로 변환하는 예제다.  
+
+OUTPUT_PARSERS.ipynb(SimpleJsonOutputParser)  
+  
 
