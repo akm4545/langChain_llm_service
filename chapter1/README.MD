@@ -711,4 +711,30 @@ SimpleJsonOutputParser의 가장 큰 장점은 스트림이 방식으로 JSON �
   
 스트리밍 출력을 사용하여 출력은 빈 JSON 객체 {}로 시작하여 점진적으로 answer 키에 대한 값이 한 글자씩 추가되는 과정을 보여준다.  
   
+# **JsonOutputParser**  
+JsonOutputParser는 랭체인에서 제공하는 또 다른 유용한 출력 파서로 JSON 형식의 출력을 요청하고 파싱하는 데 사용된다. Pydantic과 함께 사용하여 구조화된 
+데이터를 처리할 수 있다. JsonOutputParser의 주요 장점은 AI 모델이 생성한 자유 형식의 텍스트를 JSON 구조로 명확히 변환할 수 있다는 점이다. 
+이를 통해 복잡한 데이터 구조를 쉽게 정의하고 다룰 수 있다.  
+  
+다른 출력 파서와 차이점은 JsonOutputParser가 JSON 형식에 특화되어 있다는 점이다. 예를 들어 PydanticOutputParser는 데이터를 Pydantic 모델로 
+직접 검증하고 구조화하는 데 적합하며 CommaSeparatedListOutputParser는 단순한 리스트 출력을 처리하는 데 사용한다. JsonOutputParser는 이와 달리 
+JSON 데이터 처리에 중점을 두고 있으며 필요한 경우 부분적으로 생성된 JSON 데이터를 스트리밍 방식으로 처리할 수 있는 유연성도 제공한다.  
+  
+따라서 JsonOutputParser는 데이터 구조가 명확한 JSON 형식의 출력이 필요한 상황에 특히 유용하며 복잡한 데이터 구조를 정의하고 이를 AI 모델의 출력과 
+통합할 때 효과적으로 활용할 수 있다.  
+  
+다음은 Pydantic과 함께 사용하여 예상되는 스키마를 간편하게 선언하는 예제다.  
+  
+OUTPUT_PARSERS.ipynb(JsonOutputParser)  
+  
+JsonOutputParser를 통해 Pydantic 모델에 맞는 출력 형식을 설정한다. 이 파서는 AI가 제공한 응답을 FinancialAdvice 클래스에 맞게 JSON 형식으로 
+변환한다. PromptTemplate은 AI에게 전달할 프롬프트를 설정하는 역할을 한다. format_instructions는 AI에게 출력 형식 지침을 제공하여 출력이 미리 정의된 
+형식에 맞도록 유도한다.  
+  
+랭체인에서 제공하는 다양한 출력 파서에 대한 더 많은 정보와 예제는 공식 홈페이지에서 확인할 수 있다. 출력 파서는 AI 모델의 응답을 구조화된 데이터로 
+변환하는 데 중요한 역할을 하며 이를 통해 더욱 정교한 AI 애플리케이션을 구축할 수 있다.  
+  
+공식 문서  
+https://python.langchain.com/docs/how_to/#output-parsers  
+  
 
