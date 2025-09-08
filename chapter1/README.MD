@@ -704,4 +704,11 @@ JSON 형식의 출력이 필요하지만 Pydantic 모델과 같은 복잡한 구
 
 OUTPUT_PARSERS.ipynb(SimpleJsonOutputParser)  
   
+SimpleJsonOutputParser()로 parser 객체를 인스턴스화한다. 답변을 JSON 형식으로 변환하는 작업을 수행한다.  
+  
+SimpleJsonOutputParser의 가장 큰 장점은 스트림이 방식으로 JSON 출력을 처리할 수 있다는 점이다. 이는 대규모 데이터를 실시간으로 처리할 때 유용하며 
+긴 응답을 기다리지 않고 점진적으로 결과를 확인할 수 있어 대화형 응답이나 대량의 데이터 처리를 요구하는 애플리케이션에서 매우 유용하다.  
+  
+스트리밍 출력을 사용하여 출력은 빈 JSON 객체 {}로 시작하여 점진적으로 answer 키에 대한 값이 한 글자씩 추가되는 과정을 보여준다.  
+  
 
