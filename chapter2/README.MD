@@ -171,3 +171,5 @@ DOCUMENT_LOADER.ipynb(WebBaseLoader)
 결과를 보면 page_content를 통해 페이지의 텍스트 데이터를 확인할 수 있다. 이처럼 WebBaseLoader는 페이지에 있는 글과 정보를 추출해 활용할 수 있는 
 형태로 제공한다.  
   
+# **PDF 로더**  
+랭체인은 PDF 파일을 읽고 처리하는 데 사용할 수 있는 다양한 PDF 로더를 제공한다.
