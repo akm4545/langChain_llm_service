@@ -149,4 +149,8 @@ return_answer_cnadidate() 함수는 사용자의 검색어를 입력받아 이�
   
 이 외에도 다양한 문서 로드가 존재하며 자세한 내용은 다음 랭체인 문서 로더 페이지에서 확인할 수 있다.  
   
-https://python.langchain.com/docs/integrations/document_loaders/
+https://python.langchain.com/docs/integrations/document_loaders/  
+  
+# **웹 페이지 로더**  
+랭체인은 웹 페이지의 HTML 콘텐츠를 로드하고 파싱하여 문서 형식으로 변환하는 다양한 도구를 제공한다.  
+  
