@@ -236,3 +236,15 @@ PyPDFLoader보다 훨씬 빠른 속도다. 분리가 정확하게 이루어졌�
 PyPDFLoader로 수행했을 때와 비교해 보면 page_content 값이 거의 유사하지만 줄바꿈 등에서 일부 차이가 있다. 또한 metadata에 파일 경로, 키워드, 
 제목, 문서 포맷 등 더 다양한 정보가 포함되어 있다.  
   
+# **PDFPlumberLoader**  
+PDFPlumberLoader는 PyMuPDFLoader와 마찬가지로 더 다양하고 상세한 메타데이터를 제공하여 PDF 문서의 구조와 내용을 깊이 이해하는 데 유리하다. 
+다만 상세한 분석을 수행하기 때문에 PyMuPDFLoader에 비해 처리 속도가 다소 느린 편이다.  
+  
+앞서와 같은 방법으로 랭체인에서 PDFPlumberLoader()를 사용해 PDF 파일을 로드한다.  
+  
+DOCUMENT_LOADER.ipynb(PDFPlumberLoader)  
+  
+실행 결과를 보면 청크의 수는 83개로 PyPDFLoader와 동일하게 나타난다. 하지만 실행 시간은 벽시계 시간 기준으로 39.1초가 소요되어 지금까지 사용한 
+로더 중 가장 오랜 시간이 걸렸다. 각 청크가 정확하게 분리되었는지 확인하기 위해 임의로 10번 청크를 출력한다.  
+  
+
