@@ -218,4 +218,21 @@ load_and_split()을 실행하면 다음과 같은 형식의 결과가 반환된�
   
 본문 내용에만 접근하려면 각 청크에서 .page_content를 호출하면 된다. 참고로 PyPDFLoader의 load_and_split() 메서드는 기본적으로 RecursiveCharacterTextSplitter를 
 사용하여 PDF를 청크로 분할한다. 청크 크기(chunk_size), 중복 범위(chunk_overlap), 분할 우선순위 문자(separators)를 조정하면 더 세밀한 분할이 
-가능하다.
+가능하다.  
+  
+# **PyMuPDFLoader**  
+PyMuPDFLoader는 빠른 속도와 다양한 메타데이터 추출 기능을 제공하여 다수의 PDF 파일이나 대용량 PDF를 처리할 때 효율적이다. PyPDFLoader에 비해 
+더 다양한 메타데이터를 추출할 수 있는 특징이 있다. 또한 청크 분할 방식이 다른 PDF로더와 다를 수 있으므로 결과를 비교한 후 적합한 로더를 선택하는 것이 
+좋다.  
+  
+랭체인에서 PyMuPDFLoader를 사용해 PDF 파일을 로드한다. PyMuPDFLoader()로 객체를 생성한 후 load_and_split()을 실행하면 PDF를 여러 개의 
+문서 청크로 분할한 문자열 리스트를 반환한다.  
+  
+DOCUMENT_LOADER.ipynb(PyMuPDFLoader)  
+  
+결과를 보면 청크의 수는 93개로 나타났고 실행 시간은 벽시계 시간 기준 2.58초가 소요되었다. 이는 동일한 문서를 벽시계 기준 23.9초에 처리했던 
+PyPDFLoader보다 훨씬 빠른 속도다. 분리가 정확하게 이루어졌는지 확인하기 위해 임의로 10번 청크를 출력한다.  
+  
+PyPDFLoader로 수행했을 때와 비교해 보면 page_content 값이 거의 유사하지만 줄바꿈 등에서 일부 차이가 있다. 또한 metadata에 파일 경로, 키워드, 
+제목, 문서 포맷 등 더 다양한 정보가 포함되어 있다.  
+  
