@@ -279,4 +279,29 @@ load()를 실행하면 다음과 같은 형식의 결과가 반환된다.
 본문 내용에만 접근하려면 각 청크에서 .page_content를 호출하면 된다. 더 작은 단위로 데이터를 분할해야 한다면 RecursiveCharacterTextSplitter의 
 파라미터를 조정하여 세밀하게 나눌 수 있다.  
   
+# **UnstructuredCSVLoader**  
+UnstructuredCSVLoader는 CSV 파일을 유연하게 처리할 수 있는 도구로 single모드와 elements 모드를 통해 다양한 방식으로 CSV 데이터를 로드할 수 있다. 
+UnstructuredCSVLoader는 CSVLoader와 달리 unstructured 라이브러리를 사용하여 CSV 파일 전체를 하나의 문서로 로드하거나 요소별로 분리할 수 있는 
+유연한 기능을 제공한다. CSV 파일의 구조가 일정하지 않거나 특수한 처리가 필요한 경우 특히 유용하다.  
+  
+UnstructuredCSVLoader를 사용하여 CSV 파일을 로드하는 과정은 간단하다. 로더 객체를 초기화할 떄 mode 매개변수를 single 또는 elements 모드로 
+선택할 수 있다. single 모드는 파일 전체를 하나의 문서로 취급하는 반면 elements 모드는 각 CSV 행을 독립적인 요소로 분리하여 처리한다. elements 
+모드를 사용할 경우 테이블의 HTML 표현이 text_as_html 키에 저장되어 HTML 데이터를 활용할 수도 있다.  
+  
+이제 UnstructuredCSVLoader를 사용하여 서울시 부동산 실거래가 데이터를 로드한다. elements 모드로 UnstructuredCSVLoader()를 실행하여 객체를 
+생성한 후 load()를 실행하면 CSV의 각 행이 독립적인 문서 청크로 반환된다.  
+  
+결과를 보면 청크의 수는 1개로 나타나 전체 CSV 파일이 단일 문서로 처리되었음을 알 수 있다. 실행 시간은 벽시계 시간 기준 1.44초가 소요되었다.  
+이는 동일한 파일을 벽시계 기준 151ms에 처리했던 CSVLoader보다는 느린 속도다.  
+  
+여기서 모드는 elements를 사용하고 있다. elements 모드는 CSV 파일을 단일의 비구조화된 텍스트 문서로 로드한다. 동시에 CSV 파일 내용을 HTML 
+형식으로 구조화한 테이블 표현도 문서 메타데이터의 text_as_html 키에 포함되어 있어 파일의 원래 구조를 유지하면서 시각화하기에 유용하다.  
+  
+청크 개수가 1개로 데이터가 너무 크다 보니 문자열 형태로 변환한 뒤 처음 500자를 출력한다.  
+  
+CSVLoader로 수행했을 떄와 비교하여 metadata에 파일 경로, 마지막 수정 날짜, text_as_html 등 더 다양한 정보가 포함되어 있다. 그중 text_as_html에는 
+CSV 데이터를 HTML 테이블 형식으로 구조화한 내용이 포함되어 있다. 각 열이 <td> 태그로 둘러싸여 있으며 전체 데이터가 <table> 태그 내에 포함되어 
+있다. 이번에는 .page_content 부분을 확인한다.  
+  
+청크가 1개여서 데이터가 크기 떄문에 문자열 타입으로 변환한 뒤 처음 500자를 출력했다. 이처럼 .page_content에는 실제 문서의 내용이 저장되어 있다. 
 
