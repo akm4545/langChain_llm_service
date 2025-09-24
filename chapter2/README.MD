@@ -670,3 +670,10 @@ RAG_CHATBOT.ipynb(PDF 문서 로드 및 텍스트 분할)
 앞의 코드에서는 PyPDFLoader로 PDF 텍스트를 추출하여 RecursiveCharacterTextSplitter로 1000자 크기의 청크로 분할하고 200자씩 겹치게 설정했다. 
 이로써 효율적인 검색과 정보 연속성을 모두 고려한다.  
   
+## **임베딩 생성과 데이터베이스 적재, 관리**  
+청크로 분할된 문서를 임베딩 모델을 통해 벡터화하여 벡터 데이터베이스에 저장한다.  
+  
+RAG_CHATBOT.ipynb(임베딩 생성 및 Chroma 데이터베이스 저장)  
+  
+텍스트 청크를 OpenAIEmbeddings로 벡터화해 크로마 데이터베이스에 저장하며 persist_directory를 통해 데이터의 영구 저장과 재사용을 지원한다.  
+  
