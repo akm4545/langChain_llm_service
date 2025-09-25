@@ -703,4 +703,11 @@ model에는 gpt-4o-mini가 설정되어 있으며 이를 통해 사용자 질문
   
 ![img.png](image/img15.png)  
   
-
+# **문맥 구성 및 챗봇 체인 구성**  
+검색한 문서 내용을 format_docs로 정리하여 프롬프트에 전달하고 모델이 이를 바탕으로 답변을 생성한다.  
+  
+RAG_CHATBOT.ipynb(문서 형식 변환 함수 정의)  
+  
+이 코드에서는 검색된 문서 청크를 하나의 텍스트로 조합하고 이를 프롬프트에 전달하여 답변을 생성한다. format_docs는 문서 청크를 연결하고 RunnablePassthrough는 
+이를 프롬프트에 전달하며 StrOutputParser는 모델 출력을 문자열로 반환한다.  
+  
