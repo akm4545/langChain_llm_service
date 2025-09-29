@@ -795,3 +795,25 @@ st.spinner를 사용하여 응답 생성 중임을 표시하며 생성된 응답
 마지막으로 st.session_state.messages.append({"role": "assistant", "content": response}) 코드를 통해 생성된 응답을 세션 상태에 저장하여 
 대화 기록을 유지한다.  
   
+이제 app.py에 코드를 작성했다면 구글 코랩에서 다음 코드를 실행시켜 외부에서 접근 가능한 URL을 생성할 수 있다.  
+  
+RAG_CHATBOT.ipynb(터널링 및 실행)  
+  
+pyngrok 라이브러리를 사용하여 스트림릿의 기본 포트인 8501에 대한 ngrok 터널을 생성한다. 이를 통해 외부에서 접근 가능한 공개 URL이 생성된다.  
+  
+![img.png](image2/img4.png)  
+  
+앞의 코드를 실행하면 ngrok을 통해 생성된 공개 URL이 출력된다. URL은 일반적으로 https://[무작위주소].ngrok-free.app 형식이다. 이 링크를 클릭하면 
+작성한 스트림릿 앱에 접근할 수 있다.  
+  
+URL에 접속하면 ngrok 보안 페이지가 먼저 표시된다. 보안 페이지에서 Visit Site 버튼을 클릭하면 스트림릿 앱이 로드된다.  
+  
+![img.png](image2/img5.png)  
+  
+스트림릿 앱이 실행되면 다음과 같은 화면이 표시된다. 사용자는 부동산 관련 질문을 입력하세요 라는 안내 메시지가 있는 입력창에 질문을 입력할 수 있다.  
+  
+![img.png](image2/img6.png)  
+  
+스트림릿의 직관적인 UI 구성요소를 활용하면 사용자가 쉽게 질문을 입력하고 응답을 확인할 수 있다. 스트림릿에 대한 더 자세한 정보는 다음 링크를 참고하자.  
+  
+https://docs.streamlit.io/deploy/streamlit-community-cloud/get-started/quickstart
