@@ -117,3 +117,20 @@ PDF 파일에서 데이터를 추출하고 저장한 뒤 이를 활용하여 PDF
 # **환경 설정**  
 MULTI_MODAL_RAG.ipynb(라이브러리 설치)   
   
+## **tesseract 설치**  
+tesseract는 PDF 파일에서 문자열을 추출하는 데 필요한 광학 문자 인식(OCR) 라이브러리다. 컴퓨터 운영체제별로 설치 방법이 다르므로 각자 운영 체제에 맞는 
+방식을 설치한다.  
+  
+- Window  
+Tesseract 3.05, Tesseract 4, Tesseract 5의 Windows 설치 프로그램은 tesseract github에서 내려받을 수 있다. 여기에는 학습 도구가 포함되어 
+있으며 32비트 및 64비트 설치 프로그램 모두 제공된다.  
+  
+- OSX(Mac)  
+다음 명령어로 설치한다.  
+brew install tesseract  
+  
+- Linux  
+다음 명령어로 설치한다.  
+sudo apt install tesseract-ocr  
+sudo apt install libtesseract-dev  
+  
