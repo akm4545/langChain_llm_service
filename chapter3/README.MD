@@ -134,3 +134,27 @@ brew install tesseract
 sudo apt install tesseract-ocr  
 sudo apt install libtesseract-dev  
   
+## **poppler 설치**  
+poppler는 PDF 렌더링과 처리에 필요한 라이브러리다. 컴퓨터 운영체제별로 각자에 맞는 방식으로 설치한다.  
+  
+- Window  
+최신 poppler의 Windows 설치 프로그램은 poppler github에서 내려받을 수 있다. 내려받은 설치 파일을 원하는 폴더 경로에 압축을 푼다. 이어서 다음과 
+같이 폴더경로\bin을 환경 변수에 추가한다.  
+  
+1. 시작 메뉴에서 환경 변수를 검색하고 시스템 환경 변수 편집을 선택한다.  
+2. 환경 변수... 버튼을 클릭한다.  
+3. 시스템 변수 섹션에서 Path를 찾아 편집을 클릭한다.  
+4. 새로 만들기를 클릭하고 추가할 경로를 입력한 후 확인을 누른다.  
+5. 프로그램 또는 컴퓨터를 다시 시작하여 변경 사항을 적용한다.  
+  
+윈도우 키 + R을 눌러 실행창을 열고 텍스트 상자에 powershell을 입력한 후 엔터 키를 눌러 파워셸을 실행한다. pdftoppm -h 명령어가 올바르게 동작한다면 
+성공적으로 설치된 것이다.  
+  
+- OSX(Mac)  
+다음 명령어로 설치한다.  
+brew install poppler  
+  
+- Linux  
+다음 명령어로 설치한다.  
+sudo apt-get install poppler-utils  
+  
