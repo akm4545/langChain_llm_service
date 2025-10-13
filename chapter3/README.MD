@@ -169,3 +169,42 @@ MULTI_MODAL_RAG.ipynb(라이브러리 설치)
   
 MULTI_MODAL_RAG.ipynb(라이브러리 설치)  
   
+# **데이터 전처리**  
+먼저 검색에 활용할 PDF 파일의 전처리를 진행하여 벡터 저장소에 저장하는 작업을 진행한다. PDF 내에는 텍스트와 이미지, 테이블 데이터 등 다양한 
+유형의 데이터가 존재한다. 이를 모두 한번에 추출한 뒤 분류하여 저장하는 작업을 진행한다.  
+  
+이번 예제에서는 질병관리청에서 주마다 발간하는 말라리아 주간소식지 PDF 파일을 사용한다. 해당 PDF는 말라리아 발생 현황에 대한 텍스트와 이를 
+보기 쉽게 도식화한 테이블 데이터, 발생 분포를 표현한 이미지 데이터를 포함하고 있다.  
+  
+먼저 파일 경로를 설정한다.  
+  
+MULTI_MODAL_RAG.ipynb(PDF 데이터 전처리)  
+  
+이제 PDF에서 각 요소들을 모두 추출한다. 이때 앞서 설치한 unstructured 라이브러리를 사용한다. unstructured 라이브러리에서는 텍스트 전처리 작업에 
+nltk를 사용하므로 이에 필요한 데이터를 같이 다운로드한다.  
+  
+MULTI_MODAL_RAG.ipynb(PDF 데이터 전처리)  
+  
+이어서 partition_pdf 함수를 사용하여 요소 추출을 진행한다.  
+  
+partition_pdf 함수에 다음과 같은 인자들을 설정하면 원하는 만큼 텍스트 데이터를 조각낼 수 있고 이미지와 테이블 구조를 추출할 수 있다.  
+  
+- filename: 분석하고자 하는 PDF 파일 경로를 지정한다.  
+- extract_images_in_pdf: PDF 안에 이미지가 있다면 이미지를 추출한다.  
+- infer_table_structure: PDF 안에 테이블이 있다면 테이블을 추출한다.  
+- chunking_strategy: 텍스트를 조각낼 전략을 선택한다. basic은 섹션 구분 없이 글자 수에 따라 조각내고 by_title은 페이지 또는 섹션 경계에 
+따라 조각낸다.  
+- extract_image_block_output_dir: 추출한 이미지를 저장할 경로를 설정한다.  
+  
+unstructured 라이브러리에서 추출된 데이터의 유형을 검사해 이미지와 테이블 구조를 추출한 수 있다.  
+  
+추출된 element의 type 문자열을 검사했을 때 unstructured.documents.elements.Table이 포함되어 있으면 테이블, unstructured.documents.elements.CompositeElement가 
+포함되어 있으면 텍스트다.  
+  
+MULTI_MODAL_RAG.ipynb(PDF 데이터 전처리)  
+  
+추출한 테이블 데이터와 텍스트 데이터를 각각 확인해본다.  
+  
+![img.png](image/img7.png)  
+![img.png](image/img8.png)  
+  
