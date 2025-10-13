@@ -158,3 +158,9 @@ brew install poppler
 다음 명령어로 설치한다.  
 sudo apt-get install poppler-utils  
   
+## **unstructured 설치**  
+tesseract와 poppler를 이용하여 PDF의 전체적인 처리를 수행하는 라이브러리인 unstructured를 설치한다. 해당 라이브러리는 tesseract와 poppler에 
+의존성을 가지므로 반드시 이들 두 라이브러리를 설치한 이후에 설치해야 한다.  
+  
+MULTI_MODAL_RAG.ipynb(라이브러리 설치)  
+  
