@@ -164,3 +164,8 @@ tesseract와 poppler를 이용하여 PDF의 전체적인 처리를 수행하는 
   
 MULTI_MODAL_RAG.ipynb(라이브러리 설치)  
   
+## **오픈AI 키 설정**  
+답변을 생성하는 데 LLM을 사용한다. 이번 실습에서는 ChatGPT API를 사용하므로 OPEN AI API KEY를 준비하여 .env 파일에 추가하고 로드한다.  
+  
+MULTI_MODAL_RAG.ipynb(라이브러리 설치)  
+  
