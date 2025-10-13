@@ -208,3 +208,6 @@ MULTI_MODAL_RAG.ipynb(PDF 데이터 전처리)
 ![img.png](image/img7.png)  
 ![img.png](image/img8.png)  
   
+# **멀티-벡터 검색기**  
+이제 추출한 요소들을 벡터화하여 저장하고 이를 통해 멀티모달 데이터를 검색할 수 있는 멀티-벡터 검색기를 구성한다.  
+  
