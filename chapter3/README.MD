@@ -217,3 +217,19 @@ MULTI_MODAL_RAG.ipynb(PDF 데이터 전처리)
   
 MULTI_MODAL_RAG.ipynb(텍스트 및 테이블 요약)  
   
+예제에서는 summarize_chain = {"element": lambda x: x} | prompt | model | StrOutputParser() 와 같이 요약 체인을 생성한다. 이는 
+element라는 key에 저장된 리스트 형식의 데이터를 입력받아 모델에 넣어 문자열 형태의 출력을 반환받는 체인이다.  
+  
+앞에서 추출한 테이블과 텍스트를 summarize_chain.batch 함수를 호출하여 실행한다. chain의 batch 함수는 입력받은 다량의 데이터를 한번에 처리할 
+수 있는 함수다.  
+  
+챗GPT는 프롬프트에 따라 각 텍스트와 테이블에 대한 요약문을 응답으로 제공하는데 이를 text_summaries, table_summaries에 따로 저장해 둔다.  
+  
+요약한 내용을 확인해본다.  
+  
+![img.png](image/img9.png)  
+![img.png](image/img10.png)  
+  
+결과를 보면 요약을 통해 훨씬 압축적이고 명확한 텍스트 데이터가 생성된 것을 확인할 수 있다.  
+  
+
