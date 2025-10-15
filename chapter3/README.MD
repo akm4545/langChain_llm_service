@@ -287,3 +287,15 @@ MULTI_MODAL_RAG.ipynb(이미지 요약문 생성)
   
 ![img.png](image/img15.png)  
   
+## **벡터 저장소에 추가**  
+이제 원본 문서와 생성한 요약본들을 벡터 저장소에 저장한다. 이번 실습에서는 크로마를 사용한다. 벡터 저장소에는 변환된 각종 테이블 요약이 임베딩 벡터 
+형태로 변환되어 저장되며 이를 통해 의미 기반 검색(semantic retrieval)을 수행하게 된다.  
+  
+텍스트를 임베딩 벡터로 변환할 때는 오픈AI의 임베딩 API를 이용한다. 크로마 DB를 선언할때 embedding_function에 OpenAIEmbeddings() 클라이언트를 
+지정하면 자동으로 벡터 저장소에 오픈 AI 임베딩 API를 사용하여 저장하게 된다.  
+  
+원본 데이터는 docstore에 저장한다. 저장 위치는 메모리이므로 InMemoryStore()를 선언한다. 선언한 저장소들을 사용하여 멀티모달 데이터를 검색할 수 있는 
+멀티벡터 검색기 MultiVectorRetriever를 선언한다.  
+  
+MULTI_MODAL_RAG.ipynb(벡터 저장소)    
+  
