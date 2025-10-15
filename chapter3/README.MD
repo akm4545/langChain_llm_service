@@ -297,7 +297,7 @@ MULTI_MODAL_RAG.ipynb(이미지 요약문 생성)
 원본 데이터는 docstore에 저장한다. 저장 위치는 메모리이므로 InMemoryStore()를 선언한다. 선언한 저장소들을 사용하여 멀티모달 데이터를 검색할 수 있는 
 멀티벡터 검색기 MultiVectorRetriever를 선언한다.  
   
-MULTI_MODAL_RAG.ipynb(벡터 저장소)    
+MULTI_MODAL_RAG.ipynb(벡터 저장소)  
   
 이제 PDF로부터 추출한 각종 데이터와 요약본들을 저장소에 저장한다.  
   
@@ -305,4 +305,6 @@ docstore에는 원본 텍스트, 테이블, base64 인코딩된 원본 이미지
   
 각 원본 데이터를 식별할 수 있는 중복되지 않는 id가 필요한데, uuid.uuid4() 함수로 중복되지 않는 id 값을 생성하여 사용하도록 한다. zip 함수를 
 사용하면 생성된 id와 원본 데이터 쌍을 만들어 저장할 수 있다.  
+  
+MULTI_MODAL_RAG.ipynb(벡터 저장소 저장)  
   
