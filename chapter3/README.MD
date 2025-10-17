@@ -342,4 +342,4 @@ MULTI_MODAL_RAG.ipynb(검색 결과 확인)
 ## **답변 생성**  
 검색기가 올바른 검색 결과를 반환하는 것을 확인했으므로 이를 기반으로 올바른 답변을 생성하는 과정을 진행한다.  
   
-MULTI_MODAL_RAG.ipynb(답변 생성)    
+MULTI_MODAL_RAG.ipynb(답변 생성)  
