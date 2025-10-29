@@ -463,3 +463,46 @@ TF-IDF와 마찬가지로 BM25에도 IDF가 계산식에 포함되어 있다. �
 특히 한국어와 같이 교착어 특성이 뚜렷한 언어에서는 이러한 전처리 과정을 거치는 것이 검색 정확도를 높이는 효과적인 방법이다. 그 결과 BM25 알고리즘에서도 
 키워드 매칭의 품질이 크게 개선되어 사용자에게 더 관련도 높은 검색 결과를 제공할 수 있게 된다.  
   
+이제 랭체인을 활용해 희소 검색을 구현한다. bm25를 활용하고 키워드 추출에 앞서 형태소 분석 단계를 추가함으로써 정확도를 높인다.  
+  
+BM25.ipynb(사전 준비)  
+  
+file_path 변수에 PDF 파일의 경로를 지정한 후 이를 이용해 PyPDFLoader 인스턴스인 loader를 생성해 지정된 PDF 파일을 읽어들일 준비를 한다. 다음으로 
+RecursiveCharacterTextSplitter 인스턴스인 doc_splitter를 생성한다. 이때 chunk_size를 2000으로, chunk_overlap을 200으로 설정한다.  
+  
+마지막으로 loader의 load_and_split() 메서드를 호출하여 PDF를 읽어 doc_splitter를 이용해 텍스트를 나눈다.  
+  
+이어서 BM25 알고리즘을 이용한 문서 검색기를 설정한다.  
+  
+BM25.ipynb(문서 검색기)  
+  
+먼저 BM25 알고리즘을 구현한 BM25Retriever를 langchain_community.retrievers에서 임포트한다. 또한 한국어 처리를 위해 Kiwi라는 한국어 형태소 분석기를 
+kiwipiepy 라이브러이에서 임포트한다.  
+  
+이어서 kiwi_tokenizer라는 이름으로 Kiwi 인스턴스를 생성하고 kiwi_tokenize라는 함수를 정의한다. 이 함수는 입력된 텍스트를 Kiwi를 이용해 토큰화하고 
+각 토큰의 기본형(form)만을 리스트로 반환한다. 이 과정을 통해 텍스트를 형태소 단위로 분리할 수 있다.  
+  
+이제 BM25Retriever.from_document() 메서드를 사용하여 bm25_retriever 인스턴스를 생성한다. 이 메서드의 인자로는 이전에 생성한 docs(분할된 문서 리스트)와 
+preprocess_func=kiwi_tokenize를 전달한다. 이는 각 문서를 인덱싱할 때 kiwi_tokenize 함수를 사용하여 전처리하라는 의미다.  
+  
+다음으로 retriever의 k 값을 2로 설정한다. 이는 검색 시 쿼리와 가장 관련성 높은 상위 2개의 문서만을 반환하도록 지정하는 옵션이다. 이렇게 설정한 
+bm25_retriever는 이후 사용자의 질의가 들어오면 해당 질의와 가장 밀접한 관련이 있는 두 개의 문서 조각을 효율적으로 검색해 제공한다.  
+  
+이제 bm25 리트리버로 관련 문서를 얻은 뒤 이를 바탕으로 최종 답변을 생성하는 단계로 넘어간다. 이 과정에서 랭체인의 RetrievalQA 체인을 활용한다.  
+  
+먼저 필요한 컴포넌트들을 랭체인 라이브러리에서 임포트한다. RetrievalQA와 ConversationalRetrievalChain은 검색과 질문-답변 기능을 제공하는 체인 클래스이고 
+ChatOpenAI는 오픈AI의 챗GPT 모델을 사용하기 위한 클래스다.  
+  
+qa_chain 변수에 RetrievalQA.from_chain_type() 메서드를 사용하여 체인을 생성한다. 이 메서드의 주요 파라미터는 다음과 같다.  
+  
+- llm: ChatOpenAI 인스턴스를 생성하여 사용한다. temperature를 0.2로 설정하여 비교적 일관된 출력을 얻도록 하고 모델은 gpt-4o를 사용한다.  
+- chain_type: "stuff"로 설정한다. 이는 모든 관련 문서를 하나의 컨텍스트로 결합하여 LLM에 전달하는 방식이다.  
+- retriever: 이전에 생성한 bm25_retriever를 사용하여 질문과 관련된 문서를 검색한다.  
+- return_source_documents: True로 설정하여 답변에 사용된 원본 문서의 정보도 함께 반환하도록 한다.  
+  
+마지막으로 qa_chain.invoke() 메서드를 호출하여 실제로 질문을 처리한다. 이 회사가 발행한 주식의 총 발행량이 어느 정도야? 라는 질문을 입력으로 제공한다.  
+  
+코드의 실행 결과를 보면 정확한 답변을 제공함을 알 수 있다.  
+  
+
+  
