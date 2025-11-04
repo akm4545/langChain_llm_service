@@ -572,5 +572,25 @@ DENSE_RETRIEVAL.ipynb(사전 준비)
   
 다음으로 문서를 불러온 뒤 적절한 크기로 분할한다. 이 과정은 앞선 희소 검색 예제와 동일한 코드를 사용한다.  
   
+이제 FAISS DB와 리트리버를 구축하는 단계로 넘어간다. 이 과정은 문서의 벡터화, 데이터베이스 생성 및 저장, 리트리버 생성의 세 부분으로 나눌 수 있다.  
+  
+우선 오픈 AI의 임베딩 모델을 사용하여 문서들을 벡터화한다. OpenAIEmbeddings 클래스의 인스턴스를 생성하고 model 매개변수로 text-embedding-3-large를 
+지정한다.  
 
+DENSE_RETRIEVAL.ipynb(리트리버 구축)  
+  
+다음으로 FAISS 데이터베이스를 생성하고 저장한다.  
+  
+이후 저장된 FAISS DB를 다시 로드한다. persist_directory 변수에 저장된 DB의 경로를 지정한 후, FAISS.load_local() 메서드를 사용하여 저장된 
+데이터베이스를 불러온다.  
+  
+마지막으로 vectordb 객체의 as_retriever() 메서드를 호출하여 faiss_retriever를 생성한다. 이때 search_kwargs 매개변수를 통해 검색 시 반환할 
+문서의 개수를 2개(k=2)로 지정한다.  
+  
+이제 FAISS 리트리버로 관련 문서를 얻은 뒤 이를 바탕으로 최종 답변을 생성하는 단계다. 앞선 희소 검색 예제와 동일한 코드를 사용하며 retriever 파라미터에 
+이전의 bm25_retriever 대신 faiss_retriever를 사용한다는 점만 차이가 있다.  
+  
+DENSE_RETRIEVAL.ipynb(질의)  
+  
+마지막으로 invoke() 메서드를 사용하여 실제 질문을 실행해본다.  
   
