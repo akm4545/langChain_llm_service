@@ -639,3 +639,8 @@ ENSEMBLE_RETRIEVAL.ipynb(FAISS 리트리버)
   
 ENSEMBLE_RETRIEVAL.ipynb(앙상블 리트리버)  
   
+앙상블 리트리버로 관련 문서를 얻은 뒤 최종 답변을 생성하는 단계다. 희소 검색 및 밀집 검색 예제와 동일한 코드를 사용하며 retriever 파라미터로 앞서 
+생성한 ensemble_retriever를 사용한다는 점만 차이가 있다.  
+  
+qa_chain.invoke() 메서드를 호출하여 실제로 질문을 처리한다. "이 회사가 발행한 주식의 총 발행량이 어느 정도야?"라는 질문을 입력으로 제공하여 답변을 생성한다.  
+  
