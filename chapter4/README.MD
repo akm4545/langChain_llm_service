@@ -1019,3 +1019,20 @@ SELF_RAG.ipynb(지원 평가 파이프라인)
   
 SELF_RAG.ipynb(유용성 평가 파이프라인)  
   
+이렇게 Self-RAG의 각 단께별 파이프라인 구성을 완료했다. 이제 각 파이프라인을 연결하고 Self-RAG의 전체 프로세스를 구현한다.  
+  
+먼저 SelfRAG 클래스를 정의한다. 이 클래스는 앞서 구현한 각 단계의 체인들을 통합하여 Self-RAG 시스템의 전체 워크플로우를 관리한다. SelfRAG 클래스를 
+구성하는 주요 메서드는 다음과 같다.  
+  
+1. init: 클래스 초기화  
+2. determine_retrieval: 검색 필요 여부 결정  
+3. retrieve_documents: 관련 문서 검색  
+4. evaluate_relevance: 검색된 문서의 관련성 평가  
+5. generate_response: 관련 컨텍스트로 응답 생성  
+6. generate_without_retrieval: 검색 없이 응답 생성  
+7. assess_and_evaluate: 생성된 응답의 지원 및 유용성 평가  
+8. select_best_response: 최고의 응답 선택  
+9. process_query: 전체 쿼리 처리 프로세스  
+  
+SELF_RAG.ipynb(SelfRAG 클래스)  
+  
