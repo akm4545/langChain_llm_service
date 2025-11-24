@@ -1036,3 +1036,36 @@ SELF_RAG.ipynb(유용성 평가 파이프라인)
   
 SELF_RAG.ipynb(SelfRAG 클래스)  
   
+각 메서드의 주요 기능을 살펴본다.  
+  
+1. init 메서드  
+SelfRAG 클래스의 인스턴스를 초기화한다. Self-RAG 시스템의 각 단계에서 사용될 핵심 컴포넌트들을 매개변수로 받아 인스턴스 변수로 저장한다. 
+vectorstore는 문서 검색에 사용될 벡터 저장소이며 retrieval_chain, relevance_chain 등은 Self-RAG의 각 단계별 파이프라인이다. top_k에는 검색할 
+상위 문서의 수를 지정한다.  
+  
+2. determine_retrieval 메서드  
+Self-RAG 시스템의 첫 번쨰 단계인 검색 필요 여부 판단 과정을 구현한다. 이 메서드는 앞서 만든 retrieval_chain을 사용하여 쿼리에 대해 외부 문서 검색이 
+필요한지 판단한다.  
+  
+사용자로부터 쿼리를 입력받아 retrieval_chain에 전달하면 retrieval_prompt와 llm을 사용하여 쿼리를 분석하고 검색 필요 여부를 판단한다. 이때 
+추론 과정을 출력하고 최종 결정인 Yes 또는 No를 반환한다. 동작 결과 retrieve_token이 Yes이면 외부 문서 검색을 실행하고 No이면 실행하지 않는다.  
+  
+3. retrieve_documents 메서드  
+Self-RAG의 두 번째 단계인 관련 문서 검색을 수행한다. 앞서 설정한 벡터 스토어(vectorstore)에서 쿼리 관련 문서를 검색하고 리스트에 저장한다.  
+  
+vectorstore의 similarity_search 메서드를 호출하여 쿼리와 유사한 상위 k개의 문서를 검색하고 각 문서 내용을 추출하여 contexts 리스트에 저장한다.  
+  
+4. evaluate_relevance 메서드  
+Self-RAG의 세 번째 단계인 문서의 관련성 평가를 수행한다. 이 메서드는 앞서 만든 relevance_chain을 사용하여 검색된 문서들이 사용자 쿼리와 얼마나 
+관련이 있는지 평가한다.  
+  
+검색된 각 문서에 대해 relevance_chain을 호출하고 relevance_prompt와 llm을 사용하여 문서의 관련성을 평가한다. 관련성 평가 결과가 Relevant인 
+문서만 relevant_contexts 리스트에 추가하며 최종적으로 연관성이 있다고 판단된 문서들만 다음 단계로 전달한다.  
+  
+5. generate_responses 메서드  
+Self-RAG의 네 번째 단계인 관련 컨텍스트로 응답 생성을 수행한다. 이 메서드는 generation_chain을 사용하여 각 관련 컨텍스트를 기반으로 사용자 쿼리에 대한 응답을 
+생성한다.  
+  
+각 관련 컨텍스트에 대해 generation_chain을 호출하여 응답을 생성한 후 responses 리스트에 저장한다.  
+  
+6. generate_without_retrieval 메서드  
