@@ -240,3 +240,7 @@ Gleaning(이삭 줍기)은 LLM의 출력을 반복적으로 검증하고 보완�
   
 ![img.png](image/img9.png)  
   
+이들의 통합 후 형태는 다음과 같다.  
+  
+![img.png](image/img10.png)  
+  
