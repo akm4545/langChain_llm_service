@@ -455,3 +455,12 @@ working_directory로 지정한다.
   
 GRAPHRAG_DB구축.ipynb(graphRag 설정)  
   
+4. .env 파일 입력  
+생성된 .env 파일에 사용할 대규모 언어 모델의 API 키를 입력한다. 이번 예제에서는 챗GTP를 사용하므로 다음과 같이 작성한다.  
+  
+- GRAPHRAG_API_KEY=API 키  
+  
+5. settings.yaml 파일 입력  
+settings.yaml 파일은 GraphRAG의 동작과 관련된 전체 파라미터를 담은 설정 파일이다. 이 파일을 통해 데이터 처리, LLM 설정, 병렬 처리 등 다양한 
+요소를 세부적으로 설정한다. 주요 설정 항목을 살펴보면 다음과 같다.  
+  
