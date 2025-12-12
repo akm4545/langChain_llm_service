@@ -523,6 +523,24 @@ AI API키를 입력한다.
   
 그래프 DB 구축은 매우 복잡한 워크플로우를 거쳐 진행된다. 전체 과정은 크게 두 가지 범주로 나눌 수 있다.  
   
+1. Base processing 단계  
+이 단계에서는 원본 문서를 처리하기 위한 기초적인 작업을 수행한다. 즉 앞서 설명한 문서 분할을 수행하고 지식 그래프 및 그래프 증강의 초기 버전을 
+구현하는 단계다.  
+  
+우선 문서 분할(create_base_text_units)을 통해 긴 문서를 여러 개의 텍스트 단위로 쪼갠 뒤 이를 바탕으로 엔티티 추출, 기본 그래프 생성, 커뮤니티 탐지, 
+임베딩 작업(create_base_extracted_entities, create_base_entity_graph), 공변량 추출(create_final_covariates)을 진행한다. 이 과정을 통해 
+초기 형태의 엔티티 그래프를 구축하고 각 엔티티 및 관계들을 식별할 수 있는 토대를 마련한다.  
+  
+2. Enrichment(고도화) 단계  
+기본적으로 구축된 그래프에 대해 추가적인 보강 작업을 수행하는 단계이다. 즉 구축된 지식 그래프를 보강하고 커뮤니티 요약 및 시각화를 수행하여 더욱 
+풍부한 정보를 제공할 수 있도록 완성도를 높이는 과정이다.  
+  
+이 단계에서는 엔티티, 관계, 커뮤니티 데이터의 정제(create_final_entities, create_final_communities, create_final_relationships), 
+그래프 시각화(create_final_nodes) 등을 거쳐 더욱 풍부하고 의미 있는 그래프 DB를 생성한다. 또한 커뮤니티 요약(create_final_community_reports) 
+생성을 통해 특정 커뮤니티를 중심으로 요약된 정보와 통계, 임베딩 등을 도출한다.  
+  
+즉 Base processing 단계가 문서 -> 엔티티 -> 기본 그래프 생성 과정이라면 Enrichment 단계는 해당 그래프를 정제하는 과정으로 이해할 수 있다.  
+  
 
   
 
