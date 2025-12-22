@@ -631,5 +631,18 @@ create_final_covariates 워크플로우에서는 앞선 단계들에서 얻은 �
 ![img.png](image2/img13.png)  
 ![img.png](image2/img14.png)
   
+이 예의 구성요소를 자세히 살펴보면 다음과 같다.  
+  
+- level: 요약문이 다루는 커뮤니티의 계층 레벨이다.   
+- rank: 요약문의 중요도 점수.  
+- title: 요약문의 제목.  
+- rank_explanation: 중요도 점수에 대한 설명. 
+- summary: 요약문의 주요 내용.  
+- findings: 주요 발견 사항들의 목록. 각 발견 사항은 explanation(상세 설명)과 summary(요약)로 구성되어 있다.  
+  
+이러한 과정을 통해 그래프 DB를 성공적으로 구축할 수 있다. 구축된 그래프 DB 결과 파일은 working_directory/output 폴더 내에 위치하게 된다. 다만 
+구글 코랩 환경에서는 런타임이 종료되면 데이터가 삭제되기 떄문에 구글 드라이브에 저장해두는 것이 좋다.  
+  
+
 
   
