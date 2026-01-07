@@ -837,3 +837,12 @@ GRAPHRAG_NEO4J저장.ipynb(Neo4j 데이터베이스 연결)
   
 GRAPHRAG_NEO4J저장.ipynb(배치 임포트 함수와 제약 조건)  
   
+## **Cypher란?**  
+Cypher는 Neo4j 그래프 데이터베이스에서 사용되는 쿼리 언어로 그래프 데이터(노드, 관계, 속성)를 조작하고 질의하는 데 특화되어 있다. SQL과 비슷한 
+선언적 구조를 가지며 MATCH(패턴 검색), CREATE(노드/관계 생성), MERGE(생성 또는 업데이트), SET(속성 설정) 같은 키워드로 직관적인 작업이 가능하다. 
+다만 테이블 기반으로 데이터를 처리하는 SQL과 달리 그래프 패턴 매칭을 통해 노드와 관계 간의 연결을 더욱 직관적으로 표현하고 탐색할 수 있다는 차이가 
+있다.  
+  
+Cypher를 처음 접한다면 다음 참고 자료를 통해 기본 문법과 사용법을 익히는 것을 추천한다.  
+  
+Neo4j Cypher 튜토리얼: https://neo4j.com/docs/getting-started/current/cypher-intro/
