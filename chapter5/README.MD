@@ -845,4 +845,22 @@ Cypher는 Neo4j 그래프 데이터베이스에서 사용되는 쿼리 언어로
   
 Cypher를 처음 접한다면 다음 참고 자료를 통해 기본 문법과 사용법을 익히는 것을 추천한다.  
   
-Neo4j Cypher 튜토리얼: https://neo4j.com/docs/getting-started/current/cypher-intro/
+Neo4j Cypher 튜토리얼: https://neo4j.com/docs/getting-started/current/cypher-intro/  
+  
+이제 모든 준비 과정이 끝났으니 GraphRAG의 결과물을 Neo4j Aura에 연동시키는 작업을 진행한다.  
+  
+먼저 최종 문서를 DB에 업로드한다. create_final_documents.parquet 파일에서 문서 데이터를 가져와 __Document__ 노드를 생성한다.  
+  
+GRAPHRAG_NEO4J저장.ipynb(GraphRAG Neo4j Aura 연동)  
+  
+다음으로 텍스트 유닛(청크)을 DB에 업로드한다. create_final_text_units.parquet 파일에서 텍스트 유닛 데이터를 로드하여 __Chunk__ 노드를 생성하고 
+문서와 연결한다.  
+  
+엔티티를 DB에 업로드한다. create_final_entities.parquet 파일에서 엔티티 데이터를 가져와 __Entity__ 노드를 생성하고 관련 속성을 추가한 뒤 
+텍스트 청크와 연결한다.  
+  
+이어서 관계를 DB에 업로드한다. create_final_relationships.parquet 파일에서 관계 데이터를 로드하여 엔티티 간 RELATED 관계를 생성한다.  
+  
+다음으로 커뮤니티를 DB에 업로드한다. create_final_communities.parquet 파일에서 커뮤니티 데이터를 로드하여 __Community__ 노드를 생성하고 해당 노드에 
+level과 title 속성을 설정한다. 이후 각 커뮤니티와 관련된 텍스트 유닛들을 DB 내에서 연결하고 커뮤니티에 속하는 엔티티들을 연결한다.  
+  
