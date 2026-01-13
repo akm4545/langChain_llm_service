@@ -864,3 +864,10 @@ GRAPHRAG_NEO4J저장.ipynb(GraphRAG Neo4j Aura 연동)
 다음으로 커뮤니티를 DB에 업로드한다. create_final_communities.parquet 파일에서 커뮤니티 데이터를 로드하여 __Community__ 노드를 생성하고 해당 노드에 
 level과 title 속성을 설정한다. 이후 각 커뮤니티와 관련된 텍스트 유닛들을 DB 내에서 연결하고 커뮤니티에 속하는 엔티티들을 연결한다.  
   
+이제 커뮤니티 보고서를 DB에 반영한다. create_final_community_reports.parquet 파일에서 커뮤니티 보고서를 가져와 커뮤니티 노드에 속성을 추가하고 
+커뮤니티의 레벨, 콘텐츠 등 속성을 업데이트 한다. 이후 발견 사항들을 개별적인 Finding 노드로 DB에 체계적으로 반영한다.  
+  
+마지막으로 각 커뮤니티에 속한 엔티티들 중 앞선 단계에서 누락된 것들은 판별하고 연결관계를 DB에 반영한다.  
+  
+이 과정을 통해 GraphRAG의 결과물을 Neo4j Aura에 저장하여 실시간 분석에 활용 가능한 지식 그래프 데이터베이스를 완성할 수 있다.  
+  
