@@ -37,3 +37,42 @@ RAG 파이프라인에서 자주 사용되는 순환(loop)과 분기(branch)를 
 - 메시지 그래프(MessageGraph): 오직 메시지 목록만으로 이루어지는 특별한 유형의 그래프 클래스다. 주로 챗봇과 같은 대화형 시스템에서 사용되며 메시지 
 흐름을 단순화하여 관리하기에 적합하다.  
   
+# **상태**  
+그래프를 정의할 때 가장 먼저 해야 할 일은 그래프의 상태(state)를 정의하는 것이다. 상태란 애플리케이션 내에서 메시지로 주고받는 변수들의 집합이다. 
+파이썬의 모든 타입으로 정의할 수 있지만 대체로 TypedDict나 Pydantic의 BaseModel 타입으로 선언한다. 상태는 그래프 내 모든 노드와 에지의 입력으로 
+사용되며 각 노드의 상태를 업데이트할 수 있다.  
+  
+```
+from typing import TypedDict
+
+class State(TypedDict):
+    count: int
+    messages: list[str]  
+```  
+  
+이 예시는 count와 messages라는 두 개의 필드를 갖는 상태 클래스다. 이 상태는 그래프 내 여러 노드에서 공유되며 지속적으로 업데이트된다.  
+  
+예를 들어 처음 노드에서 {"count": 1, "messages": ["hi"]}를 입력하고 다음 노드에서 {"count": 2}를 입력한다면 상태는 {"count": 2, "messages": ["hi"]}의 
+형태가 된다. 그다음 노드에서 {"messages": ["bye"]}를 입력한다면 최종 상태는 {"count": 2, "messages": ["bye"]}의 형태가 된다.  
+  
+![img.png](image/img2.png)  
+  
+리듀서(reducer)를 사용한다면 기존 상태에 새로운 업데이트를 결합하여 새로운 상태를 생성하는것도 가능하다. 다음 예시와 같이 Annotated 타입으로 
+리듀서 함수를 정의한다면 messages 변수는 리듀서 함수를 통해 업데이트된다.  
+  
+```
+from typing import TypedDict, Annotated
+from operator import add 
+
+class State(TypedDict):
+    count: int
+    messages: Annotated[list[str], add]
+```  
+  
+이 예시에서는 messages 필드에 add 리듀서가 지정되어 있어 새로운 메시지가 추가될 때 기존 리스트와 병합된다.  
+  
+예를 들어 처음 노드에서 {"count": 1, "messages": ["hi"]}를 입력하고 다음 노드에서 {"count": 2}를 입력한다면 상태는 {"count": 2, "messages": ["hi"]}의 
+형태가 된다. 그다음 노드에서 {"messages": ["bye"]}를 입력한다면 최종 상태는 messages에 operator.add를 실행하여 {"count": 2, "messages": ["hi", "bye"]}의 형태가 된다.  
+  
+![img.png](image/img3.png)  
+  
