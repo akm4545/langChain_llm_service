@@ -76,3 +76,24 @@ class State(TypedDict):
   
 ![img.png](image/img3.png)  
   
+# **노드**  
+그래프에서 노드(node)는 실제 작업을 수행하는 실행 단위이다. 에이전트의 로직을 담은 파이썬 함수가 곧 노드가 되며 그래프에서 각 노드는 상태를 입력으로 
+받아 동작하고 그 결과로 상태값을 업데이트하여 반환한다. 노드는 정상적으로 실행될 수도 있고 실패할 수도 있다. 한마디로 노드는 그래프 내에서 실질적인 
+작업을 처리하는 핵심 구성 요소다.  
+  
+노드는 첫 번째 인자로 상태값(state)을 받으며 두 번째 인자로 설정값(config)을 받는다. 이렇게 생성한 노드는 add_node() 메서드를 통해 그래프에 추가할 
+수 있다.  
+  
+```
+from langchain_core.runnables import RunnableConfig
+from langgraph.graph import StateGraph
+
+# 상태 그래프 선언
+builder = StateGraph(dict)
+
+# 노드로 사용할 함수 정의
+def my_node(state: dict, config: RunnableConfig):
+    print("In node: ", config["configurable"]["user_id"])
+    
+    return {"
+```
