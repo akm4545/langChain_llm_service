@@ -95,5 +95,15 @@ builder = StateGraph(dict)
 def my_node(state: dict, config: RunnableConfig):
     print("In node: ", config["configurable"]["user_id"])
     
-    return {"
-```
+    return {"result": f"Hello, {state['input']}!"}
+
+def my_other_node(state: dict):
+    return state # 상태를 그대로 반환
+    
+# 노드를 그래프에 추가
+builder.add_node("my_node", my_node)
+builder.add_node("other_node", my_other_node)
+```  
+  
+앞의 코드에서 my_node는 입력된 상태값을 변경하기 않고 그대로 반환하는 간단한 노드다.  
+  
