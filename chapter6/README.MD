@@ -107,3 +107,27 @@ builder.add_node("other_node", my_other_node)
   
 앞의 코드에서 my_node는 입력된 상태값을 변경하기 않고 그대로 반환하는 간단한 노드다.  
   
+# **START 노드**  
+START 노드는 그래프 실행의 시작점을 나타내는 특별한 노드다. 사용자 입력을 처음 받아 그래프로 전달하며 그래프 내에서 첫 번재로 실행될 노드를 지정할 
+때 사용한다.  
+  
+```
+from langgraph.graph import START
+
+graph.add_edge(START, "node_a")
+```  
+  
+앞의 코드에서는 START 노드가 실행된 후 node_a로 상태가 전달된다.  
+  
+# **END 노드**  
+END 노드는 그래프 실행이 완료되었음을 나타내는 종료 노드다. 특정 노드의 작업이 끝난 후 더 이상 처리할 작업이 없을 경우 END 노드로 연결하여 그래프 
+실행을 종료한다.  
+  
+```
+from langgraph.graph import END
+
+graph.add_edge("node_a", END)
+```  
+  
+이 코드는 node_a가 실행된 후 그래프가 종료되도록 설정한 예이다.  
+  
