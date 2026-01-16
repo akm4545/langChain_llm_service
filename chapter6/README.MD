@@ -146,3 +146,14 @@ graph.add_edge("node_a", "node_b")
   
 이 코드는 node_a의 작업이 끝난 후 node_b가 실행되도록 지정한다.  
   
+# **조건부 에지**  
+특정 조건에 따라 다른 노드로 분기하거나 플로우를 종료할 때 사용한다. 조건을 판단하는 함수가 필요하며 그 결과에 따라 다음 실행 노드를 선택한다.  
+  
+```
+graph.add_conditional_edges("node_a", routing_function,
+                            {True: "node_b", False: "node_c"})
+```
+  
+이 코드에서는 routing_function이 node_a 다음으로 어떤 노드를 사용할지 결정하는 함수가 되며 해당 함수의 반환값이 True이면 node_b가, False면 
+node_c가 다음 실행 노드가 된다.  
+  
