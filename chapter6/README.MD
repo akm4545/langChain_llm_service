@@ -157,3 +157,14 @@ graph.add_conditional_edges("node_a", routing_function,
 이 코드에서는 routing_function이 node_a 다음으로 어떤 노드를 사용할지 결정하는 함수가 되며 해당 함수의 반환값이 True이면 node_b가, False면 
 node_c가 다음 실행 노드가 된다.  
   
+# **진입 지점**  
+진입 지정(entry point)은 그래프가 시작될 때 처음 실행할 노드를 명시한다. 주로 START라는 가상의 노드를 사용하여 그래프의 첫 실행 지점을 설정한다.  
+  
+```
+from langgraph.graph import START
+
+graph.add_edge(START, "node_a")
+```  
+  
+이 코드는 START 노드에서 첫 번째로 실행할 노드로 에지를 추가하는 add_edg() 메서드를 사용하여 그래프의 진입 지점을 지정한다.  
+  
