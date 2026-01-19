@@ -168,3 +168,17 @@ graph.add_edge(START, "node_a")
   
 이 코드는 START 노드에서 첫 번째로 실행할 노드로 에지를 추가하는 add_edg() 메서드를 사용하여 그래프의 진입 지점을 지정한다.  
   
+# **조건부 진입 지점**  
+사용자의 입력이나 외부 조건에 따라 그래프 실행의 첫 번째 노드를 동적으로 결정할 수 있다. 진입 지점 역시 조건부로 설정하여 다양한 초기 상태에 대응한다.  
+  
+```
+from langgraph.graph import START
+
+graph.add_conditional_edges(START, routing_function,
+                            {True: "node_b", False: "node_c"})
+```  
+  
+add_conditional_edge() 메서드를 사용하여 가상의 START 노드와 라우팅 함수를 입력받는다. 세 번째 인자로 라우팅 함수의 반환값에 해당하는 노드의 
+매핑 정보를 제공하여 조건부로 진입 지점 노드를 선택할 수 있다. 앞의 코드에서는 routing_function이 진입 지점으로 어떤 노드를 사용할지 결정하는 함수가 
+되며 해당 함수의 반환값이 True이면 node_b가, False이면 node_c가 첫 실행 노드가 된다.  
+  
