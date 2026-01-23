@@ -320,3 +320,34 @@ LANG_GRAPH.ipynb(상태 저장하기)
 이어서 graph_builder.compile 함수로 그래프를 컴파일할 떄 checkpointer 파라미터에 MemorySaver를 지정한다. 이 작업만으로도 이제 상태를 저장할 
 수 있는 그래프가 된다.  
   
+# **Prebuilt Components**  
+랭그래프에서는 자주 사용하는 기능과 패턴을 쉽게 구현할 수 있도록 미리 빌드된 구성요소(Prebuilt Components)를 제공한다.  
+  
+앞선 조건문 구현에서는 BasicToolNode 클래스를 직접 정의하여 도구 노드를 만들고 route_tools 메서드로 조건부 에지를 직접 작성했다. 하지만 이와 
+같은 LLM의 도구 사용 기능은 자주 사용되는 전형적인 패턴이다. 따라서 랭그래프에서는 이러한 기능을 매번 직접 주현하지 않고 import 만으로 손쉽게 활용할 
+수 있도록 미리 빌드된 컴포넌트를 제공한다.  
+  
+- 미리 빌드된 도구 노드: ToolNode  
+직접 만든 BasicToolNode와 동일하게 동작하며 정의한 도구 리스트만 넘겨주면 바로 사용할 수 있다.  
+  
+```
+from langgraph.prebuilt import ToolNode
+
+tool_node = ToolNode(tools=[tool])
+graph_builder.add_node("tools", tool_node)
+```  
+  
+- 미리 빌드된 도구 조건부 에지: tools_condition  
+앞에서 정의한 route_tools 메서드와 같은 역할을 하며 조건에 따라 도구 노드로 분기하거나 종료 노드로 이동한다.  
+  
+```
+from langgraph.prebuilt import tools_condition
+
+graph_builder.add_conditional_edges(
+    "chatbot",
+    tools_condition,
+)
+```  
+  
+이처럼 미리 빌드된 구성요소를 활용하면 코드가 훨씬 간결해지고 구현 과정이 더 직관적이며 효율적으로 바뀐다.  
+  
