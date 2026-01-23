@@ -317,3 +317,6 @@ MemorySaver는 랭그래프 기본 라이브러리에 포함된 메모리 기반
   
 LANG_GRAPH.ipynb(상태 저장하기)  
   
+이어서 graph_builder.compile 함수로 그래프를 컴파일할 떄 checkpointer 파라미터에 MemorySaver를 지정한다. 이 작업만으로도 이제 상태를 저장할 
+수 있는 그래프가 된다.  
+  
