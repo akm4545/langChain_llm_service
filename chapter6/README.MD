@@ -401,4 +401,22 @@ LANG_GRAPH.ipynb(루프 개입하기)
   
 ![img.png](image/img15.png)  
   
+다음 노드가 tools 메서드임을 확인할 수 있다. 현재 그래프는 더 진행되지 않고 멈춰 있으므로 지금 시점에서 상태 변경이 필요하다면 마음껏 업데이트할 
+수 있다. 예를 들어 다음 단계에 도구 사용이 예정되어 있지만 도구 호출을 하지 않고 임의의 응답을 강제로 입력해본다.  
+  
+먼저 snapshot.values["messages"][-1]을 통해 최근 메시지를 가져와서 그 안의 tool_call id 값을 저장한다. 이 id는 ToolMessage를 직접 수정할 
+떄 필요하다.  
+  
+"서울의 날씨는 매우 맑아요."라는 응답을 포함하는 새로운 메시지 new_messages를 정의한다. 도구 노드의 응답은 ToolMessage와 AIMessage를 동시에 포함하므로 
+두 메시지를 동일한 형식으로 맞춘다.  
+  
+이후 graph 객체의 update_state() 메서드를 호출하여 현재의 상태값을 업데이트할 수 있다. 정의한 new_messages를 인자로 전달하여 업데이트한다.  
+  
+LANG_GRAPH.ipynb(state 업데이트)  
+  
+이제 get_state() 메서드를 다시 호출하여 그래프의 상태(즉, messages)가 실제로 업데이트되었는지 학인한다. 가장 최근 두 개의 메시지를 조회해 보면 다음과 
+같이 업데이트되었음을 확인할 수 있다.  
+  
+![img.png](image2/img.png)  
+  
 
