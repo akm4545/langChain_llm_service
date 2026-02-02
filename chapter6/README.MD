@@ -509,3 +509,8 @@ LANG_GRAPH_CORRECTIVE_RAG.ipynb(문서 평가 노드)
   
 LLM은 검색된 문서가 질문과 연관이 있는지 '예' 또는 '아니오'로 답변한다.  
   
+# **답변 생성하기**  
+검색된 문서가 적절하다면 해당 문서를 맥락으로 활용해 사용자에게 응답할 답변을 생성해야 한다.  
+  
+LANG_GRAPH_CORRECTIVE_RAG.ipynb(답변 생성)  
+  
