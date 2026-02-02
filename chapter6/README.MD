@@ -477,3 +477,20 @@ LANG_GRAPH_CORRECTIVE_RAG.ipynb(환경 설정)
 답변을 생성하는 데 LLM을 사용한다. 여기서는 ChatGPT API를 사용한다. 또한 외부 도메인 지식을 활용할 경우를 대비해 Tavily Search를 연동한다. 
 이를 위해 OPEN AI API KEY와 TAVILY API KEY를 준비하여 .env 파일에 추가하고 로드한다.  
   
+# **문서 인덱싱**  
+사용자의 질문을 처리하기 전에 검색 대상 문서를 사전에 인덱싱해야 한다. 이번 실습에서는 구글의 코드 스타일 가이드 문서를 크롤링하고 이를 기반으로 
+검색 가능한 벡터 데이터베이스를 구축한다.  
+  
+LANG_GRAPH_CORRECTIVE_RAG.ipynb(벡터 DB 구축)  
+  
+먼저 크롤링할 블로그의 대상 url을 수집한 뒤 랭체인 커뮤니티에서 제공하는 WebBaseLoader를 사용하여 해당 url의 웹 페이지 내용을 크롤링하고 doc_list 변수에 
+저장한다.  
+  
+이렇게 크롤링한 문서의 내용을 바르게 검색하려면 텍스트를 분할하여 저장해야 한다. 긴 문서 전체에서 원하는 키워드를 검색하는 것보다 분할된 작은 텍스트에서 
+키워드를 검색하는 것이 훨씬 속도가 빠르고 결과를 도출하기 쉽기 떄문이다. 여기서는 랭체인 라이브러리에서 제공하는 RecursiveCharacterTextSplitter를 
+사용한다. from_tiktoken_encoder 함수를 통해 원하는 청크 크기(chunk_size)와 겹침 정도(chunk_overlap)를 설정할 수 있다. 이번 실습에서는 250 토큰 
+단위로 문서를 분할하고 텍스트 간 겹침은 없도록 설정한다.  
+  
+분할된 문서를 Chroma 벡터 저장소에 임베딩하여 저장한다. 문서나 텍스트를 벡터화하는 방법은 다양하지만 오픈 AI에서 제공하는 임베딩 API를 사용하면 OpenAIEmbeddings 
+클라이언트를 통해 간편하게 구현할 수 있다. 이어서 Chroma에 저장된 데이터를 검색할 수 있는 retriever를 생성한다.  
+  
