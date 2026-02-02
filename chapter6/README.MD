@@ -474,4 +474,6 @@ new_message를 넘겨주면 그래프의 상태값이 새로 생성한 메시지
   
 LANG_GRAPH_CORRECTIVE_RAG.ipynb(환경 설정)  
   
-
+답변을 생성하는 데 LLM을 사용한다. 여기서는 ChatGPT API를 사용한다. 또한 외부 도메인 지식을 활용할 경우를 대비해 Tavily Search를 연동한다. 
+이를 위해 OPEN AI API KEY와 TAVILY API KEY를 준비하여 .env 파일에 추가하고 로드한다.  
+  
