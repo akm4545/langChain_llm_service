@@ -537,5 +537,20 @@ LANG_GRAPH_CORRECTIVE_RAG.ipynb(질문 재작성)
   
 ![img.png](image2/img9.png)  
   
-
+# **웹 검색하기**  
+웹 검색은 TavilySearchResults를 사용하여 수행한다.  
+  
+LANG_GRAPH_CORRECTIVE_RAG.ipynb(웹 검색 툴 정의)  
+  
+Tavily 도구를 정의했으므로 웹 검색이 필요한 시점에 이 도구를 호출하면 된다.  
+  
+# **상태**  
+그래프를 작성하기에 앞서 그래프에서 사용할 상태값을 정의한다.  
+  
+LANG_GRAPH_CORRECTIVE_RAG.ipynb(상태값 정의)  
+  
+- question: 사용자의 질문 또는 웹 검색을 위해 재작성된 질문  
+- generation: LLM이 생성한 답변  
+- web_search: 웹 검색 여부를 나타내는 상태  
+- documents: 검색된 문서 리스트  
   
