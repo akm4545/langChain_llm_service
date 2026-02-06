@@ -554,3 +554,8 @@ LANG_GRAPH_CORRECTIVE_RAG.ipynb(상태값 정의)
 - web_search: 웹 검색 여부를 나타내는 상태  
 - documents: 검색된 문서 리스트  
   
+# **그래프**  
+이제 노드와 에지를 통해 Corrective-RAG 기능을 수행하는 그래프를 완성한다.  
+  
+LANG_GRAPH_CORRECTIVE_RAG.ipynb(Corrective-RAG 그래프)  
+  
