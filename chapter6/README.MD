@@ -557,5 +557,36 @@ LANG_GRAPH_CORRECTIVE_RAG.ipynb(상태값 정의)
 # **그래프**  
 이제 노드와 에지를 통해 Corrective-RAG 기능을 수행하는 그래프를 완성한다.  
   
-LANG_GRAPH_CORRECTIVE_RAG.ipynb(Corrective-RAG 그래프)  
+LANG_GRAPH_CORRECTIVE_RAG.ipynb(Corrective-RAG 노드)  
   
+이처럼 노드들이 수행할 행동에 대한 메서드를 작성한다. 각 메서드는 상태값을 입력으로 받아 해당 상태값을 활용하여 미리 정의된 RAG 체인을 실행한다. 
+이후 이렇게 얻은 응답으로 새로운 상태값을 생성하게 된다.  
+  
+이제 각 노드를 연결할 에지에 대한 메서드를 작성한다.  
+  
+LANG_GRAPH_CORRECTIVE_RAG.ipynb(Corrective-RAG 에지)  
+  
+에지 메서드는 상태값을 검사하여 해당 상태값에 따라 다음에 호출할 노드를 결정하게 된다. 노드와 에지로 활용할 메서드를 모두 정의했다. 이제 정의한 노드와 
+에지를 그래프에 추가하여 최종 워크플로우를 구성한다.  
+  
+LANG_GRAPH_CORRECTIVE_RAG.ipynb(Corrective-RAG 워크플로우 구성)  
+  
+정의한 그래프가 의도한 대로 구성되었는지 확인해 본다.  
+  
+LANG_GRAPH_CORRECTIVE_RAG.ipynb(Corrective-RAG 그래프 시각화)  
+  
+![img.png](image2/img10.png)  
+  
+이제 완성된 흐름이 잘 동작하는지 확인해본다. 그래프를 컴파일하여 app 변수에 저장했으므로 사용자의 질문을 입력한 뒤 app.stream으로 그래프 실행 
+과정을 스트리밍 할 수 있다.  
+  
+LANG_GRAPH_CORRECTIVE_RAG.ipynb(Corrective-RAG 그래프 테스트)  
+  
+![img.png](image2/img11.png)  
+  
+모두 연관된 문서일  경우 문서를 활용하여 답변을 생성한다.  
+  
+![img.png](image2/img12.png)  
+![img.png](image2/img13.png)  
+  
+연관 없는 문서가 존재할 경우 질문을 재작성하고 웹 검색 결과를 추가하여 답변을 생성한다.  
