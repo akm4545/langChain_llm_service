@@ -611,3 +611,19 @@ LANG_GRAPH_CODE_ASSIST_CHATBOT.ipynb(문서 정의)
 여기서 RecursiveUrlLoader는 지정한 URL을 기준으로 하위 페이지까지 재귀적으로 크롤링하며 BeautifulSoup을 사용해 페이지에서 텍스트만 추출한다. 
 이렇게 수집한 문서들은 LLM이 코드 생성과 관련된 질문에 답변할 떄 참고하는 맥락으로 제공된다.  
   
+# **코드 생성**  
+사용자의 요청에 따라 코드를 생성하는 함수를 작성한다. 이 함수는 코드 생성 노드에서 사용된다.  
+  
+LLM이 LCEL 전문가로서 사용자의 질문에 답변하도록 지시하는 프롬프트를 정의하고 LLM이 출력하는 코드를 구조적으로 저장할 데이터 모델 code를 정의한다. 
+이 데이터 모델은 프롬프트에서 요구하는 prefix, imports, code, description으로 구성된다.  
+  
+llm 변수에 ChatOpenAI 클라이언트가 정의되어 있으므로, llm.with_structured_output(code)와 같이 선언하면 LLM은 code 데이터 모델에 맞는 구조화된 
+출력을 반환한다. 이제 이 프롬프트와 llm.with_structured_output(code)를 결합하여 RAG 체인을 생성하고 code_gen_chain으로 정의한다.  
+  
+LANG_GRAPH_CODE_ASSIST_CHATBOT.ipynb(코드 생성)  
+  
+이제 LLM은 크롤링한 LCEL 공식 문서 내용을 맥락으로 제공받아 사용자의 질문이 입력되면 질문과 문서를 종합하여 코드를 생성하게 된다. code_gen_chain에 
+맥락과 질문을 넣어 invoke() 함수를 호출하면 이렇게 정의한 코드 생성 체인이 실행된다. 응답은 code 데이터 모델에 맞춰 구조화된 출력으로 제공된다.  
+  
+![img.png](image2/img15.png)  
+  
