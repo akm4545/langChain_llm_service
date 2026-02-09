@@ -603,3 +603,11 @@ LANG_GRAPH_CORRECTIVE_RAG.ipynb(Corrective-RAG 그래프 테스트)
   
 LANG_GRAPH_CODE_ASSIST_CHATBOT.ipynb(환경 설정)  
   
+# **문서 정의**  
+LLM에 제공할 코드 관련 문서를 정의한다. 랭체인 LECL 공식 문서를 가져와 코드 맥락으로 제공한다.  
+  
+LANG_GRAPH_CODE_ASSIST_CHATBOT.ipynb(문서 정의)  
+  
+여기서 RecursiveUrlLoader는 지정한 URL을 기준으로 하위 페이지까지 재귀적으로 크롤링하며 BeautifulSoup을 사용해 페이지에서 텍스트만 추출한다. 
+이렇게 수집한 문서들은 LLM이 코드 생성과 관련된 질문에 답변할 떄 참고하는 맥락으로 제공된다.  
+  
