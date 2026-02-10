@@ -627,3 +627,13 @@ LANG_GRAPH_CODE_ASSIST_CHATBOT.ipynb(코드 생성)
   
 ![img.png](image2/img15.png)  
   
+# **상태**  
+그래프에서 사용할 상태를 정의한다. 코드 어시스턴트 챗봇에서는 다음과 같은 상태값들을 사용한다.  
+
+LANG_GRAPH_CODE_ASSIST_CHATBOT.ipynb(상태)  
+  
+- error: 테스트 오류가 발생했는지 여부  
+- messages: 사용자의 질문, 오류 메시지, 이유 등을 포함하는 메시지 목록  
+- generation: 생성된 코드  
+- iterations: 시도 횟수  
+  
