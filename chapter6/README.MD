@@ -645,3 +645,21 @@ LANG_GRAPH_CODE_ASSIST_CHATBOT.ipynb(상태)
   
 LANG_GRAPH_CODE_ASSIST_CHATBOT.ipynb(그래프)  
   
+이번에는 노드의 행동 여부를 결정하는 에지 메서드를 구현한다. 오류 발생 여부와 시도 횟수 상태값을 기준으로 종료할지 재시도할지를 결정한다. 오류가 없거나 
+최대 시도 횟수(3회)에 도달하면 종료하고 그렇지 않으면 다시 시도한다.  
+  
+마지막으로 노드와 에지를 연결해 그래프를 구성한다.  
+  
+정의한 그래프가 의도한 대로 구성되었는지 확인한다.  
+
+LANG_GRAPH_CODE_ASSIST_CHATBOT.ipynb(그래프 시각화)  
+  
+![img.png](image3/img.png)  
+  
+이제 완성된 그래프에 질문을 입력하여 테스트해본다.  
+
+LANG_GRAPH_CODE_ASSIST_CHATBOT.ipynb(그래프 테스트)  
+  
+![img.png](image3/img2.png)  
+![img.png](image3/img3.png)  
+  
