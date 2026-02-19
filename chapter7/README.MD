@@ -134,4 +134,13 @@ create_pdf_retriever 함수는 PDF 파일 경로와 벡터 저장소 경로, 오
 이제 이 함수를 이용하여 일본 ICT 정책에 대해 검색하는 검색기와 미국 ICT 정책에 대해 검색하는 검색기를 각각 만든다.  
   
 create_pdf_retriever 함수를 사용해 일본과 미국의 ICT 정책 문서를 각각의 벡터 데이터베이스 검색기로 생성한다. persist_directory에 "db_ict_policy_japan_2024"와 
-"db_ict_policy_usa_2024"라는 서로 다른 경로를 지정함으로써 두 
+"db_ict_policy_usa_2024"라는 서로 다른 경로를 지정함으로써 두 문서의 벡터 데이터베이스가 서로 영향을 주지 않도록 독립적으로 저장하여 관리할 수 있다. 
+만약 같은 경로를 사용한다면 두 번째 문서를 처리할 떄 첫 번쨰 문서의 데이터가 덮어써지거나 섞일 수 있기 떄문에 이렇게 경로를 분리하는 것이 중요하다.  
+  
+일본 ICT 정책의 경우 "ict_japan_2024.pdf"파일을 읽어 "db_ict_policy_japan_2024" 디렉터리에 벡터 데이터베이스를 생성한다. 마찬가지로 미국 ICT 
+정책은 "ict_usa_2024.pdf" 파일을 "db_ict_policy_usa_2024" 디렉터리에 저장한다.  
+  
+이렇게 만든 두 개의 retriever 객체를 create_retriever_tool 함수를 사용해 ReAct 에이전트가 사용할 수 있는 검색 도구로 변환한다.  
+  
+REACT_AGENT.ipynb(ReAct 에이전트 검색 도구)  
+  
