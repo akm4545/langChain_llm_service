@@ -198,3 +198,20 @@ REACT_AGENT.ipynb(사용자 정의 ReAct 프롬프트)
 성능을 얻기 위해 임의로 추가한 내용이다. 이처럼 ReAct 에이전트를 사용할 때는 본인이 직접 작성한 커스텀 프롬프트를 사용하여 더 자세하게 설명하면 좋은 성능을 
 얻을 수 있다.  
   
+# **에이전트 객체 생성**  
+ReAct 에이전트를 동작시키기 위해 작성한 프롬프트를 대규모 언어 모델에 설정하여 에이전트 객체를 생성한다.  
+  
+REACT_AGENT.ipynb(ReAct 에이전트 생성)  
+  
+랭체인의 ChatOpenAI()를 사용하여 llm 객체를 생성한다. gpt-4o 모델을 사용하고 모델 답변의 창의성을 제어하는 temperature 값을 0으로 설정해 초기화한다. 
+temperature 값을 0으로 사용하여 모델의 답변 다양성을 줄이는 이유는 에이전트를 생성할 떄는 예측하지 못한 창의적인 답변을 얻고자 하기보다는 지시사항에 
+명확히 따르기를기대하는 상황이기 때문이다.  
+  
+이어서 앞서 만든 검색 도구들(tools)과 llm 객체를 결합해 react_agent를 생성한다. 또한 앞서 작성한 커스텀 프롬프트인 prompt 매개변수를 전달한다.  
+  
+마지막으로 react_agent와 tools를 AgentExecutor로 감싼다. vervose=True로 설정하면 모델이 최종 답변을 얻기까지 내부적으로 몇 번레 걸쳐서 Thought/
+Action/Action Input/Observation 사이클을 수행하는 과정을 사용자도 볼 수 있게 된다. handle_parsing_errors=True로 설정해 파싱 오류가 
+발생하더라도 자동으로 처리한다. 여기서 파싱 오류란 Thought/Action/Action Input/Observation을 작성하는 과정에서 간혹 대규모 언어 모델이 
+형식을 잘못 작성하는 경우를 의미한다.  
+  
+
