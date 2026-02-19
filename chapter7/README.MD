@@ -144,3 +144,14 @@ create_pdf_retriever 함수를 사용해 일본과 미국의 ICT 정책 문서�
   
 REACT_AGENT.ipynb(ReAct 에이전트 검색 도구)  
   
+create_retriever_tool 함수는 retriever 객체를 ReAct 에이전트가 활용할 수 있는 도구 형태로 변환해주는 함수다. 앞서 생성한 retriever_japan과 
+retriever_usa 객체를 바탕으로 도구의 이름(name)과 설명(description)을 추가하여 ReAct 에이전트가 활용할 수 있는 형태로 만든다.  
+  
+description에는 각 검색기의 상세한 용도를 작성해야 한다. 예를 들어 일본 ICT 검색기의 경우 "일본의 ICT 시장 동향 정보를 제공합니다. 일본 ICT와 
+관련된 질문은 해당 도구를 사용하세요."라고 작성했다. 여기서 주의할 점은 각 도구에 대한 description을 매우 자세하게 작성해야 한다는 점이다. 이후 
+ReAct 에이전트가 동작할 떄 에이전트는 여기에 적힌 설명을 보고 사용자의 질문에 따라 도구를 선택한다. 따라서 description에 도구에 대한 설명이 
+제대로 적혀 있지 않다면 에이전트는 상황에 맞는 도구를 제대로 선택할 수 없으므로 주의해야 한다.  
+  
+생성된 jp_engine과 usa_engine은 tools 리스트에 담았다. 이렇게 만든 tools 리스트는 나중에 코드에서 ReAct 에이전트에게 전달된다. 에이전트는 이들 
+도구의 상세한 description을 통해 각 질문에 가장 적합한 도구를 선택하고 효과적인 검색을 수행할 수 있게 된다.  
+  
