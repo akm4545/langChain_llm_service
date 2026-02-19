@@ -97,3 +97,6 @@ REACT_AGENT.ipynb(환경 설정)
 4. AgentExecutor, creaste_react_agent: ReAct 에이전트를 생성하고 실행하는 핵심 컴포넌트다.  
 5. PromptTemplate: 에이전트의 프롬프트를 템플릿화하여 관리한다.  
   
+# **오픈 AI키 설정**  
+답변을 생성하는 데 ChatGPT API를 사용하므로 오픈 AI API 키를 .env 파일에서 로드한다.  
+  
