@@ -382,3 +382,71 @@ for type_name in set(dataset['type']):
 ```  
   
 4. 학습용/테스트용 데이터 분할 비율 설정  
+train/test 데이터 분할 비율을 설정한다. test_ratio 변수에 0.8을 할당하여 전체 데이터의 80%를 테스트 데이터로, 나머지 20%를 학습 데이터로 사용하도록 
+지정한다. 보통은 학습 데이터의 양이 더 많고 성능을 평가하기 위한 데이터의 양이 더 적다. 하지만 이번 실습에서는 유료 클라우드인 런팟을 사용하므로 실습 
+시 과도한 학습 비용을 방지하기 위해서 학습 데이터를 적게 설정했다.  
+  
+```
+test_ratio = 0.8
+
+train_data = []
+test_data = []
+```  
+  
+5. 타입별 데이터 분할  
+데이터셋의 균형을 유지하면서 학습용과 테스트용 데이터를 분리하는 부분. 각 타입별로 동일한 비율로 분할하는 이유는 무작위로 전체 데이터를 나누면 
+특정 타입에 데이터가 한쪽으로 쏠릴 수 있기 떄문이다. 예를 들어 synthetic_question 타입이 학습 데이터에 너무 많이 들어가고 테스트 데이터에는 
+거의 없다면 모델이 이 타입의 질문에 대해서만 잘 학습하게 될 위험이 있다. 이를 방지하고자 각 타입별로 80:20의 비율을 유지하면서 분할한다.  
+  
+```
+for type_name in set(dataset['type']):
+    curr_type_data = [i for i in range(len(dataset)) if dataset[i]['type'] == type_name]
+    
+    test_size = int(len(curr_type_data) * test_ratio)
+    
+    test_data.extend(curr_type_data[:test_size])
+    train_data.extend(curr_type_data[test_size:])
+```  
+  
+구현을 살펴보면 set(dataset['type'])으로 원문 각 type에 대해 반복문을 실행한다. 각 반복문에서 현재 type에 해당하는 모든 데이터의 인덱스를 릿트 컴프리헨션으로 
+추출한다. 코드 [i for i in range(len(dataset)) if dataset[i]['type'] == type_name]은 데이터셋을 순회하면서 현재 type과 일치하는 데이터의 
+인덱스만 수집한다. 그다음 test_ratio를 사용해 테스트 데이터 개수를 계산하고 슬라이싱으로 현재 type의 데이터를 test_data와 train_data 리스트에 
+분배하여 추가한다. 이는 나중에 실제 학습과 테스트에 사용할 데이터의 인덱스를 보관하는 것이다.  
+  
+5. OpenAI 형식으로 데이터 변환 함수 정의  
+OpenAI 형식으로 데이터를 변환하는 format_data() 함수를 정의한다. OpenAI 형식이란 챗GPT를 개발한 OpenAI에서 만든 데이터의 표준 형식을 말하는데 
+messages라는 리스트 안에 각각의 대화를 역할(role)과 내용(content)으로 구분하여 담는 구조다. 여기서 system은 AI의 행동 지침을, user는 사용자의 
+질문을, assistant는 AI의 답변을 나타낸다.  
+  
+```
+def format_data(sample):
+    search_result = "\n------\n".join([f"문서{idx + 1}: {result}" for idx, result in enumerate(sample["search_result"])])
+    
+    return {
+        "messages": [
+            {
+                "role": "system",
+                "content": system_message.foramt(search_result=search_result),
+            },
+            {
+                "role": "user",
+                "content": sample["question"],
+            },
+            {
+                "role": "assistant",
+                "content": sample["answer"]
+            },
+        ],
+    }
+```  
+  
+7. 분할된 데이터를 OpenAI 형식으로 변환  
+분할한 train_data와 test_data의 각 샘플에 format_data() 함수를 적용하여 최종 데이터셋을 생성한다. 각 인덱스에 해당하는 데이터를 format_data() 
+함수를 이용해 OpenAI 형식으로 변환하여 train_dataset과 test_dataset에 저장한다.  
+  
+```
+train_dataset = [format_data(dataset[i]) for i in train_data]
+test_dataset = [format_data(dataset[i) for i in test_data]
+```  
+  
+
