@@ -172,3 +172,19 @@ type 값이 mrc_question인 경우는 질문이 굉장히 지엽적인 데이터
 먼저 전체 데이터에 대해 search_result의 개수와 extracted_ref_numbers의 개수를 계산하여 새로운 열인 search_result_len과 extracted_ref_len에 
 저장한다.  
   
+'search_result_len'열에는 각 데이터의 검색 결과의 개수, 'extracted_ref_len'열에는 각 데이터가 답변할 떄 인용한 문서의 개수가 기록되었다. 이제 
+해당 두 개의 열을 참고하여 특정 type 값을 입력하면 해당하는 데이터 유형의 검색 결과와 인용 문서 개수에 대한 통계 정보와 차트를 시각화하는 함수 
+plot_lengths_by_type을 작성한다.  
+  
+RAG_DATASET.ipynb(데이터 유형 통계)  
+  
+이제 plot_lengths_by_type 함수에 데이터프레임 df와 통계를 확인할 데이터의 유형인 mrc_question을 입력하여 'search_result_len'과 'extracted_ref_len'의 
+통계 정보와 차트를 확인해 본다.  
+  
+![img.png](image/img3.png)  
+  
+출력된 결과를 보면 mrc_question 데이터의 유형인 경우 모든 데이터 491개의 검색 결과가 5개로 동일하며 이 중 439개는 답변 시 1개의 문서를 인용하는 
+데이터다. 그 외에 44개의 데이터가 답변 시 검색 결과 중 2개의 문서를 인용하고 답변 시 검색 결과 중 3개나 4개의 문서를 인용하는 데이터는 극소수이며 
+5개의 문서를 인용하는 데이터는 없다. 이는 해당 유형의 데이터가 질문이 매우 지엽적이어서 답변 시 다수의 문서를 인용하는 경우가 극히 드물다는 것을 
+보여준다.  
+  
