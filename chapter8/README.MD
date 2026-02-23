@@ -353,3 +353,32 @@ RAG_TUNING.ipynb(데이터 전처리)
   
 ![img.png](image/img13.png)  
   
+각 코드 블록이 어떤 역할을 하는지 구체적으로 살펴본다.  
+  
+1. 데이터셋 로드  
+허깅페이스 허브에서 RAG 데이터셋을 불러온다. load_dataset() 함수를 사용하여 "iamjoon/klue-mrc-rag-dataset"이라는 데이터셋을 불러온다. 
+이 데이터셋은 실습에 사용할 전체 데이터를 담고 있다.  
+  
+```
+dataset = load_dataset("iamjoon/klue-mrc-ko-rag-dataset", split="train")
+```  
+  
+2. 시스템 프롬프트 정의  
+학습에 사용할 시스템 프롬프트를 정의한다. 이 프롬프트에는 RAG 성능을 높이기 위한 여러 가지 중요한 지침이 담겨 있다.  
+  
+![img.png](image/img14.png)  
+  
+프롬프트 끝의 {search_result}는 추후 실제 검색 결과로 대체된다. 학습할 때도 우리가 원하는 방향으로 대규모 언어 모델이 답변하도록 상세한 시스템 
+프롬프트를 작성해야 한다.  
+  
+3. 원본 데이터 타입 분포 확인  
+원본 데이터의 type별 분포를 확인한다. set() 함수로 중복 없는 type 목록을 만들고 count() 메서드로 각 type이 몇 번 등장하는지 계산해 출력한다. 
+데이터셋에는 synthetic_question, mrc_question, mrc_question_with_1_to_4_negative, paraphrased_question, no_answer라는 5가지 타입이 있다.  
+  
+```
+print("원본 데이터의 type 분포:")
+for type_name in set(dataset['type']):
+    print(f"{type_name}: {dataset['type'].count(type_name)}")
+```  
+  
+4. 학습용/테스트용 데이터 분할 비율 설정  
