@@ -449,4 +449,24 @@ train_dataset = [format_data(dataset[i]) for i in train_data]
 test_dataset = [format_data(dataset[i) for i in test_data]
 ```  
   
-
+8. 최종 데이터셋 크기 출력  
+최종적으로 만들어진 train_dataset과 test_dataset의 크기를 출력한다. 이를 통해 데이터 분할이 의도한 대로 이루어졌는지 확인할 수 있다.  
+  
+```
+print(f"\n전체 데이터 분할 결과: Train {len(train_dataset)}개, Test {len(test_dataset)}개")
+```  
+  
+9. 분할된 데이터 타입별 분포 출력  
+분할된 데이터의 type별 분포를 출력한다. 이를 통해 데이터 분할이 각 type에 대해 균형 있게 이루어졌는지 검증할 수 있다.  
+  
+```
+print("\n학습 데이터의 type분포:")
+for type_name in set(dataset['type']):
+    count = sum(1 for i in train_data if dataset[i]['type'] == type_name)
+    print(f"{type_name}: {count}")
+    
+print("\n테스트 데이터의 type 분포:")
+for type_name in set(dataset['type']):
+    count = sum(1 for i in test_data if dataset[i]['type'] == type_name)
+    print(f"{type_name}: {count}") 
+```
