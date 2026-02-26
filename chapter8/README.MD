@@ -744,4 +744,6 @@ RAG_DATASET.ipynb(테스트 데이터 전처리)
 ![img.png](image3/img12.png)  
 ![img.png](image3/img13.png)  
   
-
+# **기본 모델 호출**  
+RAG_DATASET.ipynb(기본 모델 호출)  
+  
