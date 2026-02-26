@@ -739,3 +739,9 @@ RAG_DATASET.ipynb(테스트 데이터 전처리)
 ![img.png](image3/img10.png)  
 ![img.png](image3/img11.png)  
   
+이를 대규모 언어 모델의 입력으로 사용할 때 실제로 우리가 얻기 원하는 정답 레이블은 다음과 같다.  
+  
+![img.png](image3/img12.png)  
+![img.png](image3/img13.png)  
+  
+
