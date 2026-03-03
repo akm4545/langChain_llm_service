@@ -378,4 +378,18 @@ dataset['corpus']를 통해 corpus를 출력해본다.
 표현한 상태이다. 이제 dataset['queries'], dataset['corpus'], dataset['relevant_docs']를 각각 corpus, queries, relevant_docs에 
 저장하고 이를 InformationRetrievalEvaluator에 전달한다.  
   
-
+# **모델 학습하기**  
+데이터의 양이 적기 떄문에 많은 학습이 필요하지는 않다. 학습 횟수를 의미하는 EPOCHS 값을 2로 설정한다. 이렇게 설정하면 학습 데이터 52개에 대해 총 
+2회 반복하여 학습한다.  
+  
+EMBEDDING_FINE-TUNING.ipynb(모델 학습하기)  
+  
+코드에서 os.environ["WANDB_DISABLED"] = "ture"는 학습 시 로그를 기록하는 모듈을 여기서는 사용하지 않는다는 의미다. 학습 과정을 시각화하지 
+않고 간단히 진행할 떄 유용하다. wramup_steps는 학습 초기에 학습률을 점진적으로 증가시키는 단계 수다. 여기서는 데이터로더(loader)의 길이와 
+에포크 수를 곱한 값의 10%를 사용하므로 전체 학습의 초반 10%는 학습률을 서서히 증가하게 된다.  
+  
+실제 학습은 model.fit() 함수를 통해 이루어진다. train_objectives=[(loader, loss)]를 통해 준비한 데이터 로더(질문-문서 쌍이 담긴 train_examples
+를 배치 크기 4로 로드)와 손실 함수(MultipleNegativesRankingLoss)를 연결한다. output_path='ext_finetune'은 파인튜닝된 모델을 exp_finetune 
+디렉터리에 저장한다는 의미다.  
+  
+GPU를 사용하고 있다면 데이터가 매우 소량이므로 수 분 이내에 학습이 끝나게 된다. 
