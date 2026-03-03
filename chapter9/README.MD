@@ -328,3 +328,54 @@ MultipleNegativesRankingLoss는 이 두 가지 목표를 달성하기 위해 설
 모델이 검색어와 문서 간의 관계를 더 정확히 이해하고 있다는 뜻이다. 이를 통해 검색어와 관련 없는 문서를 검색 결과에서 멀리하고 관련성이 높은 문서를 
 강조할 수 있다.  
   
+# **평가 데이터 전처리**  
+이번 실습에서는 검색 성능을 평가하는 데 InformationRetrievalEvaluator를 사용한다. 이 도구를 사용하려면 평가 데이터를 특정 형식으로 전처리해야 한다. 
+InformationRetrievalEvaluator는 정보 검색 모델을 평가하는 도구로 다음 세 가지 필수 데이터 구조를 입력받는다.  
+  
+1. queries  
+질문 ID를 키(key)로, 질문 텍스트를 값(value)으로 갖는 파이썬 딕셔너리다. 예를 들어 다음과 같은 구조다.  
+   
+![img.png](image/img13.png)  
+  
+2. corpus  
+문서 ID를 키로, 문서 텍스트를 값으로 갖는 파이썬 딕셔너리다. 예를 들어 다음과 같은 구조다.  
+  
+![img.png](image/img14.png)  
+  
+3. relevant_docs  
+질문 ID를 키로, 해당 질문에 관련된 문서 ID들의 집합(set)을 값으로 갖는 파이썬 딕셔너리다. 예를 들어 다음과 같은 구조다.  
+  
+![img.png](image/img15.png)  
+![img.png](image2/img.png)  
+  
+실제 코드를 가정하여 조금 더 구체적인 예를 들어 살펴본다. 앵커 질문들이 저장된 val_queries와 이와 연관되는 문서들이 저장된 val_positive_doc가 
+다음과 같다고 가정한다.  
+  
+![img.png](image2/img2.png)  
+  
+이 데이터를 InformationRetrievalEvaluator에서 사용하려면 다음과 같은 형식으로 변환해야 한다.  
+  
+![img.png](image2/img3.png)  
+  
+이러한 형식을 참고하여 기존의 val_queries, val_positive_docs를 이와 같은 형태로 전처리하는 코드를 작성한다.  
+  
+이제 dataset에는 InformationRetrievalEvaluator를 사용하는 데 필요한 데이터인 queries, corpus, relevant_docs가 저장되어 있다. 먼저 
+dataset['corpus']를 통해 corpus를 출력해본다.  
+  
+![img.png](image2/img4.png)  
+  
+출력 결과를 보면 평가 데이터로 사용할 일본 ICT 문서에 'd+숫자' 형태로 문서 ID가 부여되어 문서 ID를 키로, 문서 텍스트를 값으로 갖는 파이썬 딕셔너리다. 
+이제 queries를 출력해본다.  
+  
+![img.png](image2/img5.png)  
+  
+출력 결과를 보면 평가 데이터로 사용할 일본 ICT 문서로부터 GPT-4o가 생성한 앵커에 해당하는 질문들이 저장되어 있다. 해당 질문에 키 값이 부여된 파이썬 
+딕셔너리다. relevant_docs를 출력해 본다.  
+  
+![img.png](image2/img6.png)  
+  
+출력 결과를 보면 질문 ID를 키로, 해당 질문에 관련된 문서 ID들의 집합(set)을 값으로 갖는 파이썬 딕셔너리다. 즉 포지티브 샘플 관계를 각 키 값을 통해 
+표현한 상태이다. 이제 dataset['queries'], dataset['corpus'], dataset['relevant_docs']를 각각 corpus, queries, relevant_docs에 
+저장하고 이를 InformationRetrievalEvaluator에 전달한다.  
+  
+
