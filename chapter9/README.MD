@@ -239,5 +239,16 @@ EMBEDDING_FINE-TUNING.ipynb(라이브러리 설치 및 도구 임포트)
 일본 ICT 동향 문서에 대해 검색 성능을 평가해본다. 실제 현업에서 임베딩 모델을 파인튜닝할 때도 실제 RAG에서 사용할 동일한 도메인의 데이터로 파인튜닝하면 
 더 좋은 효과를 얻을 수 있다.  
   
-EMBEDDING_FINE-TUNING.ipynb()  
+EMBEDDING_FINE-TUNING.ipynb(PDF 추출)  
+  
+앞의 코드를 실행하면 깃허브 저장소에서 두 개의 PDF 파일을 다운로드한다. 이제 내려받은 두 개의 파일을 PDF 로더를 이용하여 각각 파이썬 문자열 리스트로 
+읽는다.  
+  
+![img.png](image/img9.png)  
+  
+extract_text_from_pdf 함수는 PDF 파일 경로를 입력받아 해당 PDF의 텍스트 내용을 페이지 단위로 추출한다. 추출된 텍스트는 앞뒤 공백을 제거하고 
+의미 있는 내용을 보장하기 위해 길이가 10자를 초과하는 텍스트만 text_chunks 리스트에 추가한다. 이렇게 수집된 모든 청크가 함수의 반환값이 된다.  
+  
+ict_usa_2024.pdf에서 추출한 텍스트는 학습 데이터로 사용할 train_corpus에 저장하고 ict_japan_2024.pdf에서 추출한 텍스트는 검증 데이터로 
+사용할 val_corpus에 저장한다.  
   
